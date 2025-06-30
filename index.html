@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">   
+    <title>Alpine</title>
+</head>
+<body x-data="App()">
+
+    <!-- Years -->
+    <div x-init="getyears()" >      
+      <h2><B>Years</B></h2>
+      <div class="decore">
+         <template x-for="year in years">
+         <a href="#" x-text="year.year" @click.prevent="getsemesters(year.year)" :class="params.cyear === year.year ? 'active-link' : ''"></a>
+         </template>
+     </div>
+    </div>
+
+    <!-- Semesters -->
+    <div x-show="params.cyear !== '' ">   
+      <h2><B>Semesters</B></h2> 
+      <div class="decore">
+         <template x-for="semester in semesters">
+            <a href="#" x-text="semester.semester" @click.prevent="getfaculty(semester.semester)" :class="params.csemester === semester.semester ? 'active-link' : ''"></a>
+         </template>
+      </div>
+    </div>
+
+    <!-- Faculty -->
+    <div x-show="params.csemester !== '' ">     
+      <h2><B>Faculty</B></h2> 
+      <div class="dec-f">
+         <template x-for="teacher in faculty">
+            <a href="#" x-text="teacher.name" @click.prevent="getgrades(teacher.fid)" :class="params.cfaculty === teacher.fid ? 'active-link' : ''"></a>
+         </template>
+      </div>
+    </div>
+
+    <!-- Grade Analysis -->
+    <div x-show="params.cfaculty !== '' ">     
+      <h2><B>Grade Analysis Teacher-Wise</B></h2> 
+      <div class="decore">
+         <table>
+            <tr>
+               <th>S#</th>
+               <th>Grade</th>
+               <th>Total</th>
+               <th>Percentage %</th>
+            </tr>
+            <template x-for="(grade,index) in grades">
+               
+               <tr>
+                  <td x-text="index+1"></td>
+                  <td x-text='grade.grade'></td>
+                  <td x-text="grade.total"></td>
+                  <td x-text="grade.per"></td>
+               </tr>
+            </template>
+         </table>
+      </div>
+    </div>
+    
+</body>
+</html>
