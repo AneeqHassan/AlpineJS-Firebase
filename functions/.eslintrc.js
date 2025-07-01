@@ -5,7 +5,7 @@ export default {
   },
   parserOptions: {
     "ecmaVersion": 2020,
-    "Type": "module"
+    "type": "module"
   },
   extends: [
     "eslint:recommended",
