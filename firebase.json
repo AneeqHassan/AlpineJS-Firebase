@@ -21,9 +21,14 @@
       "rewrites": [
       {
         "source": "/api/**",
+        "destination": "https://alpinejs-firebase.onrender.com/api/**",
         "function": "api"
+      },
+      {
+        "source": "**", 
+        "destination": "/index.html" 
       }
-    ],
+  ],
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint"
       ]
