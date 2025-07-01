@@ -6,6 +6,7 @@ function App(){
         async getyears(){
             const years = await fetch(`/api/years`).then((res)=>res.json());
             this.years = years;
+            console.log(years);
         },
 
         semesters:[],
