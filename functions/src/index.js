@@ -2,7 +2,6 @@ import express from "express";
 import indexRouter from "./routes.js";
 import path, { dirname } from "path"; // directory for folder on any machine
 import { fileURLToPath } from "url";
-import functions from "firebase-functions";
 import cors from "cors";
 const app = express();
 const allowedOrigins = [
@@ -28,5 +27,4 @@ app.use(express.json());
 app.get('/', (req,res) => res.sendFile(path.join(__dirname,'../../public/index.html'))); 
 app.use('/api',indexRouter);   
 
-export const api = functions.https.onRequest(app);
 
