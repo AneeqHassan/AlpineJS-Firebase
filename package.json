@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node functions/src/index.js",
+    "start": "node src/index.js",
     "dev": "node --watch index"
   },
   "keywords": [],

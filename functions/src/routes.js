@@ -5,11 +5,10 @@ const router = express.Router();
 
 router.get('/years',async (req,res)=>{
     try {
-        const years = await sql(
+        const years = await sql
         `SELECT DISTINCT(year) 
         FROM recap 
-        ORDER BY year;`
-        );
+        ORDER BY year;`;
         res.status(200).json(years);
     } catch (error) {
         console.error("Error fetching years:", error);
@@ -19,11 +18,10 @@ router.get('/years',async (req,res)=>{
 
 router.get('/semesters/:year',async (req,res)=>{
     try {
-        const semesters = await sql(
+        const semesters = await sql
         `SELECT DISTINCT(semester) 
         FROM recap
-        WHERE year = ${req.params.year} ORDER BY semester;`
-        );
+        WHERE year = ${req.params.year} ORDER BY semester;`;
         res.status(200).json(semesters);
     } catch (error) {
         console.error("Error fetching semesters:", error);
@@ -33,13 +31,12 @@ router.get('/semesters/:year',async (req,res)=>{
 
 router.get('/faculty/:year/:semester',async (req,res)=>{
     try {
-        const faculty = await sql(
+        const faculty = await sql
         `SELECT DISTINCT(name), f.fid 
         FROM faculty f 
         JOIN recap r 
         ON f.fid=r.fid 
-        WHERE semester = ${req.params.semester} AND year = ${req.params.year} ORDER BY name;`
-        );
+        WHERE semester = ${req.params.semester} AND year = ${req.params.year} ORDER BY name;`;
         res.status(200).json(faculty);
     } catch (error) {
         console.error("Error fetching faculty:", error);
@@ -49,7 +46,7 @@ router.get('/faculty/:year/:semester',async (req,res)=>{
 
 router.get('/grades/:year/:semester/:faculty',async (req,res)=>{
     try {
-        const grade = await sql(
+        const grade = await sql
         `SELECT * ,  ROUND((CAST(total AS FLOAT) * 100 / CAST(SUM AS FLOAT)):: numeric, 2) per
         FROM (
         SELECT * , (
@@ -86,8 +83,7 @@ router.get('/grades/:year/:semester/:faculty',async (req,res)=>{
             AND ROUND(marks) BETWEEN g.start AND g.end
             GROUP BY g.grade
         ) A
-        ) C;`
-        );
+        ) C;`;
         res.status(200).json(grade);
     } catch (error) {
         console.error("Error fetching grades:", error);
