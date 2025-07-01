@@ -5,8 +5,8 @@ import { fileURLToPath } from "url";
 import cors from "cors";
 const app = express();
 const allowedOrigins = [
-    "https://bootloader-kernel-arch.firebaseapp.com",
-    "https://bootloader-kernel-arch.web.app"
+    "https://alpinejs-7e917.firebaseapp.com",
+    "https://alpinejs-7e917.web.app"
 ];
 
 
